@@ -24,6 +24,13 @@ Beautifully crafted, customized status pages. Communicate status and incident ma
 
 ## Quickstart
 
+### Repositories
+
+Source code is split between two repositories:
+
+ * [front](https://github.com/monitstatus/front) contains the Vue client
+ * [back](https://github.com/monitstatus/back) contains the API, celery beat/workers and status pages webapp
+
 ### Dependencies
 
  - SendGrid api key with a validated sending domain
