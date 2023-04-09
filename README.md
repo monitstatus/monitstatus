@@ -42,23 +42,22 @@ Source code is split between two repositories:
 
 Clone the repos, manually set the envvars for both repos and launch the local environment:
 
-    git clone git@github.com:monitstatus/back.git
+    git clone git@github.com:monitstatus/monitstatus.git
+    cd monitstatus
+    git submodule init
+    git submodule update
     cp back/.env.sample back/.env
-
-    # IMPORTANT!
-    # edit .env file and set the required variables
+    # Edit .env file and set the required variables
 
     docker compose -f back/docker-compose.yml run --rm web alembic upgrade head 
-    # IMPORTANT!
-    # This will create a few templates on sendgrid and print a few envvars that you should copy to your .env file
-    docker compose -f back/docker-compose up -d db redis
+    # This will create templates on sendgrid and print envvars that you should copy to .env file
     docker compose -f back/docker-compose.yml run --rm web python app/core/generate_sendgrid_templates.py
-    docker-compose -f back/docker-compose.yml up -d
+    docker compose -f back/docker-compose.yml up -d
 
-    git clone git@github.com:monitstatus/front.git
     cd front
-    # IMPORTANT! replace envvars during the build
+    # IMPORTANT! replace build arguments if required
     docker build \
+        --build-arg FRONT_URL=http://localhost:8080
         --build-arg API_URL=http://localhost:8000 \
         --build-arg SLACK_CLIENT_ID=$SLACK_CLIENT_SECRET \
         --build-arg STATUS_PAGES_URL=http://localhost:8001 \
