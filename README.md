@@ -57,12 +57,12 @@ Clone the repos, manually set the envvars for both repos and launch the local en
 
     git clone git@github.com:monitstatus/front.git
     cd front
-    # IMPORTANT! replace slack secret during the build (i think this is a vulnerability..)
+    # IMPORTANT! replace envvars during the build
     docker build \
         --build-arg API_URL=http://localhost:8000 \
-        --build-arg SLACK_CLIENT_SECRET=$SLACK_CLIENT_SECRET \
+        --build-arg SLACK_CLIENT_ID=$SLACK_CLIENT_SECRET \
         --build-arg STATUS_PAGES_URL=http://localhost:8001 \
         -t front .
-    docker run -d -p 127.0.0.1:3000:80 --name front front
+    docker run -d -p 127.0.0.1:8080:80 --name front front
 
-And go to http://localhost:3000
+And go to http://localhost:8080
